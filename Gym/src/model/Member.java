@@ -190,7 +190,7 @@ public class Member extends Person implements Registerable, Payable, FitnessEqui
 							System.out.println("│          	        		[ 추천 유산소 운동 ]         	   			│");
 							System.out.println("├───────────────────────────────────────────────────────────────────────────────────────────────┤");
 							System.out.println("│ 3) 스텝밀	   								        	│");
-							System.out.println("│    => 끊임없이 나오는 계단을 오르며 하체 근육 전체와 엉덩이(둔근)를 강하게 자극하는 고강도 유산소 운동입니다.    	│");
+							System.out.println("│    => 끊임없이 나오는 계단을 오르며 하체 근육 전체와 엉덩이(둔근)를 강하게 자극하는 고강도 유산소 운동입니다.    			│");
 							System.out.println("└───────────────────────────────────────────────────────────────────────────────────────────────┘");
 							break;
 					}
