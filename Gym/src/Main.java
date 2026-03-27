@@ -154,7 +154,7 @@ public class Main {
                     System.out.print("트레이너 이름: ");
                     tName = sc.nextLine();
                     t = gm.findTrainer(tName);
-                    if (t == null) {
+                    if (t == null) { // 해당이름이 없으면 println 출력
                         System.out.println("이름을 확인해 주세요.");
                         return;
                     }
