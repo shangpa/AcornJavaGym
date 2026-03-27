@@ -1,1 +1,8 @@
 /.metadata/
+
+# IntelliJ
+.idea/
+*.iml
+
+# 컴파일 결과물
+Gym/bin/
