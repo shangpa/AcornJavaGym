@@ -168,7 +168,15 @@ public class Main {
 
 
         System.out.print("회원 이름: ");      mName = sc.nextLine();
-        System.out.println("원하시는 운동 부위를 선택하세요: 상체"+ "하체"+ "유산소");
+        
+        System.out.println("┌──────────────────────────────────────────┐");
+		System.out.println("│            [ 운동 종류 선택 ]         	   │");
+		System.out.println("├──────────────────────────────────────────┤");
+		System.out.println("│  => 상체                		   │");
+		System.out.println("│  => 하체                 		   │");
+		System.out.println("│  => 유산소               		   │");
+		System.out.println("└──────────────────────────────────────────┘");
+		System.out.print("▶ 선택: ");
         String bodyPart = sc.nextLine();
 
         if (!validParts.contains(bodyPart)) {
