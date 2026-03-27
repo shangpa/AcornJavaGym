@@ -104,11 +104,11 @@ public class Main {
         Trainer t;
         Member m;
         System.out.println("=== 트레이너 메뉴 ==");
-        System.out.println("1.트레이너 등록 2.회원 추가 3.회원 조회 4.회원 식단 관리 5.출석 회원 조회 0. 뒤로");
+        System.out.println("1.트레이너 등록 2.회원 추가 3.트레이너 조회 4.회원 식단 관리 5.출석 회원 조회 6.담당 회원 목록 조회 7.운동 루틴 추천 0. 뒤로");
         System.out.print("선택 >> ");
         try {
             int choice = Integer.parseInt(sc.nextLine());
-            if (choice < 0 || choice > 5) {
+            if (choice < 0 || choice > 7) {
                 System.out.println("잘못된 선택입니다.");
                 trainerMenu();
                 return;
@@ -149,6 +149,30 @@ public class Main {
                     t = gm.findTrainer(tName);
                     if (t == null) { System.out.println("이름을 확인해 주세요."); return; }
                     t.printAttendance();
+                    break;
+                case 6:
+                    System.out.print("트레이너 이름: ");
+                    tName = sc.nextLine();
+                    t = gm.findTrainer(tName);
+                    if (t == null) {
+                        System.out.println("이름을 확인해 주세요.");
+                        return;
+                    }
+                    t.printManagedMembers();
+                    break;
+
+                case 7:
+                    System.out.print("트레이너 이름: ");
+                    tName = sc.nextLine();
+                    System.out.print("회원 이름: ");
+                    mName = sc.nextLine();
+                    t = gm.findTrainer(tName);
+                    m = gm.findMember(mName);
+                    if (t == null || m == null) {
+                        System.out.println("이름을 확인해 주세요.");
+                        return;
+                    }
+                    t.recommendWorkout(m);
                     break;
                 case 0:
                     return;

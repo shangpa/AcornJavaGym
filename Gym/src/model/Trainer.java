@@ -49,6 +49,11 @@ public class Trainer extends Person implements Registerable, DietManageable {
 			System.out.println("회원이 존재하지 않습니다.");
 			return;
 		}
+		
+		if (managedMembers.contains(member)) {
+		    System.out.println(member.getName() + " 회원은 이미 담당 회원입니다.");
+		    return;
+		}
 
 		managedMembers.add(member);
 		updateGradeByMemberCount();
@@ -60,6 +65,36 @@ public class Trainer extends Person implements Registerable, DietManageable {
 
 	    for (int i = 0; i < managedMembers.size(); i++) {
 	        System.out.println((i + 1) + ". " + managedMembers.get(i).getName());
+	    }
+	}
+	
+	public void printManagedMembers() {
+	    System.out.println("=== 담당 회원 목록 ===");
+
+	    if (managedMembers.isEmpty()) {
+	        System.out.println("담당 회원이 없습니다.");
+	        return;
+	    }
+
+	    for (int i = 0; i < managedMembers.size(); i++) {
+	        System.out.println((i + 1) + ". " + managedMembers.get(i).getName());
+	    }
+	}
+	
+	public void recommendWorkout(Member member) {
+	    double bmi = member.getBMI(member.getHeight(), member.getWeight());
+
+	    System.out.println("회원 이름: " + member.getName());
+	    System.out.println("BMI: " + bmi);
+
+	    if (bmi < 18.5) {
+	        System.out.println("추천 운동: 가벼운 유산소 + 근력운동 위주");
+	    } else if (bmi < 23.0) {
+	        System.out.println("추천 운동: 유산소 + 근력운동 균형 루틴");
+	    } else if (bmi < 25.0) {
+	        System.out.println("추천 운동: 중강도 유산소 + 하체/코어 운동");
+	    } else {
+	        System.out.println("추천 운동: 유산소 중심 + 전신 순환운동");
 	    }
 	}
 
