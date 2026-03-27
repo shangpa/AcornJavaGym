@@ -2,6 +2,8 @@ import manager.GymManager;
 import model.Member;
 import model.MembershipType;
 import model.Trainer;
+import model.Locker;
+
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,10 +14,15 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // 프로그램 시작 시 락커 1~100 자동 생성
+        for (int i = 1; i <= 100; i++) {
+            gm.addLocker(new Locker(i));
+        }
+
         System.out.println("=== 헬스장 회원 관리 시스템 ===");
 
         while (true) {
-            System.out.println("\n1. 회원 메뉴  2. 트레이너 메뉴  3. 운동기구 안내  0. 종료");
+            System.out.println("\n1. 회원 메뉴  2. 트레이너 메뉴  3. 운동기구 안내  4.락커 메뉴  0. 종료");
             System.out.print("선택 >> ");
             int choice = Integer.parseInt(sc.nextLine());
 
@@ -23,6 +30,7 @@ public class Main {
                 case 1: memberMenu(); break;
                 case 2: trainerMenu(); break;
                 case 3: equipmentMenu(); break;
+                case 4: lockerMenu(); break;
                 case 0:
                     System.out.println("종료합니다.");
                     return;
@@ -182,6 +190,57 @@ public class Main {
             equipmentMenu();
             return; }
         m.explainEquipment(bodyPart);
+    }
+
+    //락커 메뉴
+    static void lockerMenu() {
+        System.out.println("=== 락커 메뉴 ===");
+        System.out.println("1. 락커 배정  2. 락커 반납  3. 락커 현황 조회  0. 뒤로");
+        System.out.print("선택 >> ");
+
+        try {
+            int choice = Integer.parseInt(sc.nextLine());
+
+            switch (choice) {
+                case 1: // 락커 배정
+                    gm.printLockerGrid();
+                    System.out.print("배정할 락커 번호 (1~100): ");
+                    int assignNum = Integer.parseInt(sc.nextLine());
+                    if (assignNum < 1 || assignNum > 100) { System.out.println("1~100 사이의 번호만 입력 가능합니다."); break; }
+                    System.out.print("회원 이름: ");
+                    String assignName = sc.nextLine();
+                    Locker assignLocker = gm.findLocker(assignNum); //번호로 락커 찾기
+                    Member assignMember = gm.findMember(assignName); //이름으로 회원 찾기
+                    if (assignLocker == null) { System.out.println("락커를 찾을 수 없습니다."); break; }
+                    if (assignMember == null) { System.out.println("회원을 찾을 수 없습니다."); break; }
+                    assignLocker.assign(assignMember); //배정 실행
+                    break;
+
+                case 2: // 락커 반납
+                    gm.printLockerGrid();
+                    System.out.print("반납할 락커 번호 (1~100): ");
+                    int releaseNum = Integer.parseInt(sc.nextLine());
+                    if (releaseNum < 1 || releaseNum > 100) { System.out.println("1~100 사이의 번호만 입력 가능합니다."); break; }
+                    Locker releaseLocker = gm.findLocker(releaseNum);
+                    if (releaseLocker == null) { System.out.println("락커를 찾을 수 없습니다."); break; }
+                    releaseLocker.release();
+                    break;
+
+                case 3: // 락커 현황 조회(락커 그리드 출력)
+                    gm.printLockerGrid();
+                    break;
+
+                case 0:
+                    return;
+
+                default:
+                    System.out.println("잘못된 선택입니다.");
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("숫자만 입력해주세요.");
+            lockerMenu();
+        }
     }
 
 }
