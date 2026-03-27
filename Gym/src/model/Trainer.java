@@ -50,7 +50,8 @@ public class Trainer extends Person implements Registerable, DietManageable {
 			return;
 		}
 		
-		if (managedMembers.contains(member)) {
+		//담당 회
+		if (managedMembers.contains(member)) { //담당회원들 들어있는 리스트안에 member가 있으면 true 아니면 false 출력 코드
 		    System.out.println(member.getName() + " 회원은 이미 담당 회원입니다.");
 		    return;
 		}
@@ -70,17 +71,16 @@ public class Trainer extends Person implements Registerable, DietManageable {
 	
 	public void printManagedMembers() {
 	    System.out.println("=== 담당 회원 목록 ===");
-
 	    if (managedMembers.isEmpty()) {
 	        System.out.println("담당 회원이 없습니다.");
 	        return;
 	    }
-
 	    for (int i = 0; i < managedMembers.size(); i++) {
 	        System.out.println((i + 1) + ". " + managedMembers.get(i).getName());
 	    }
 	}
 	
+	//회원 BMI 계산해서 해당 운동 추천 해주기 
 	public void recommendWorkout(Member member) {
 	    double bmi = member.getBMI(member.getHeight(), member.getWeight());
 
